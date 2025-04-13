@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_enhancement_mrp_enhancement,mrp_enhancement.mrp_enhancement,model_mrp_enhancement_mrp_enhancement,base.group_user,1,1,1,1

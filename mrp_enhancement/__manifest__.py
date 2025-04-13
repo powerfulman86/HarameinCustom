@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Account Enhancement",
+    'name': "MRP Enhancement",
 
     'summary': """
-        Account Enhancement""",
+        MRP Enhancement""",
 
     'author': "CubicIt",
-    'category': 'Accounting/Accounting',
+    'category': 'Manufacturing/Manufacturing',
     'version': '16.0',
     'license': 'AGPL-3',
     # any module necessary for this one to work correctly
@@ -21,7 +21,7 @@
     'demo': [
         'demo/demo.xml',
     ],
-    # 'images': ['static/description/icon.png'],
+    'images': ['static/description/icon.png'],
     'installable': True,
     'application': False,
     'auto_install': False,
