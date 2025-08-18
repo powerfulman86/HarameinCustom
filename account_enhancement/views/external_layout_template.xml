@@ -2,20 +2,22 @@
 
 <odoo>
     <template id="external_layout_inherit_reg_vat"
-              inherit_id="web.external_layout_standard">
-        <!-- Match any div that contains the 'header' class among others -->
-        <xpath expr="//div[contains(concat(' ', normalize-space(@class), ' '), ' header ')]"
+              inherit_id="web.external_layout">
+        <!-- The .page wrapper exists in all external layouts -->
+        <xpath expr="//div[contains(concat(' ', normalize-space(@class), ' '), ' page ')]"
                position="inside">
-            <div class="mt-1">
-                <t t-if="company.company_registry">
-                    <span>Registration No:</span>
-                    <span t-esc="company.company_registry"/>
-                </t>
-                <t t-if="company.vat">
-                    <span class="ms-3">VAT:</span>
-                    <span t-esc="company.vat"/>
-                </t>
-            </div>
+            <t t-if="company and (company.company_registry or company.vat)">
+                <div class="mb-1 small text-muted">
+                    <t t-if="company.company_registry">
+                        <span>Registration No:</span>
+                        <span t-esc="company.company_registry"/>
+                    </t>
+                    <t t-if="company.vat">
+                        <span class="ms-3">VAT:</span>
+                        <span t-esc="company.vat"/>
+                    </t>
+                </div>
+            </t>
         </xpath>
     </template>
 </odoo>
