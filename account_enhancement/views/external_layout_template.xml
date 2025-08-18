@@ -1,28 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
+    <template id="external_layout_inherit_reg_vat"
+              inherit_id="web.external_layout_standard">
+        <!-- Add extra <li> items inside the company address block -->
+        <xpath expr="//div[@name='company_address']//ul" position="inside">
+            <li t-if="company.company_registry">
+                <span>Registration No:</span>
+                <span t-esc="company.company_registry"/>
+            </li>
 
-    <template id="external_layout_inherit_reg_vat" inherit_id="web.external_layout">
-        <!-- Match the first available report wrapper among several common containers -->
-        <xpath expr="(//main[contains(concat(' ', normalize-space(@class), ' '), ' o_report_layout ')])[1] |
-                     (//div[contains(concat(' ', normalize-space(@class), ' '), ' o_report_layout ')])[1] |
-                     (//div[contains(concat(' ', normalize-space(@class), ' '), ' article ')])[1] |
-                    (//div[contains(concat(' ', normalize-space(@class), ' '), ' page ')])[1]
-                    " position="inside">
-            <t t-if="company and (company.company_registry or company.vat)">
-                <div class="mb-1 small text-muted">
-                    <t t-if="company.company_registry">
-                        <span>Registration No:</span>
-                        <span t-esc="company.company_registry"/>
-                    </t>
-                    <t t-if="company.vat">
-                        <span class="ms-3">VAT:</span>
-                        <span t-esc="company.vat"/>
-                    </t>
-                </div>
-            </t>
+            <!-- Show VAT only if not already shown by 'forced_vat' in parent -->
+            <li t-if="(not forced_vat) and company.vat">
+                <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                <span t-esc="company.vat"/>
+            </li>
         </xpath>
     </template>
 </odoo>
-
-
