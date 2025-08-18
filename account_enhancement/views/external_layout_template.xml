@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-    <template id="external_layout_inherit_reg_vat" inherit_id="web.external_layout_standard">
-        <xpath expr="//div[@class='header']" position="inside">
+    <template id="external_layout_inherit_reg_vat"
+              inherit_id="web.external_layout_standard">
+        <!-- Match any div that contains the 'header' class among others -->
+        <xpath expr="//div[contains(concat(' ', normalize-space(@class), ' '), ' header ')]"
+               position="inside">
             <div class="mt-1">
-                <span>Registration No:</span>
-                <span t-esc="company.company_registry or ''"/>
-                <span class="ms-3">VAT:</span>
-                <span t-esc="company.vat or ''"/>
+                <t t-if="company.company_registry">
+                    <span>Registration No:</span>
+                    <span t-esc="company.company_registry"/>
+                </t>
+                <t t-if="company.vat">
+                    <span class="ms-3">VAT:</span>
+                    <span t-esc="company.vat"/>
+                </t>
             </div>
         </xpath>
     </template>
