@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="external_layout_inherit_reg_vat" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[@class='header']" position="inside">
+            <div class="mt-1">
+                <span>Registration No:</span>
+                <span t-esc="company.company_registry or ''"/>
+                <span class="ms-3">VAT:</span>
+                <span t-esc="company.vat or ''"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
