@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-    <template id="external_layout_inherit_reg_vat"
-              inherit_id="web.external_layout">
-        <!-- The .page wrapper exists in all external layouts -->
-        <xpath expr="//div[contains(concat(' ', normalize-space(@class), ' '), ' page ')]"
-               position="inside">
+
+    <template id="external_layout_inherit_reg_vat" inherit_id="web.external_layout">
+        <!-- Match the first available report wrapper among several common containers -->
+        <xpath expr="(//main[contains(concat(' ', normalize-space(@class), ' '), ' o_report_layout ')])[1] |
+                     (//div[contains(concat(' ', normalize-space(@class), ' '), ' o_report_layout ')])[1] |
+                     (//div[contains(concat(' ', normalize-space(@class), ' '), ' article ')])[1] |
+                    (//div[contains(concat(' ', normalize-space(@class), ' '), ' page ')])[1]
+                    " position="inside">
             <t t-if="company and (company.company_registry or company.vat)">
                 <div class="mb-1 small text-muted">
                     <t t-if="company.company_registry">
@@ -21,3 +24,5 @@
         </xpath>
     </template>
 </odoo>
+
+
