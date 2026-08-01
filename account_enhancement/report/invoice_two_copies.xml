@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_half_page_copy">
+        <div class="ae-invoice-copy" dir="rtl">
+            <div class="ae-header">
+                <div class="ae-company-text">
+                    <div class="ae-company-name" t-field="o.company_id.name"/>
+                    <div class="ae-company-address">
+                        <span t-field="o.company_id.partner_id"
+                              t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                    </div>
+                    <div class="ae-company-contact" t-if="o.company_id.phone or o.company_id.mobile">
+                        <span t-if="o.company_id.phone" t-esc="o.company_id.phone"/>
+                        <span t-if="o.company_id.phone and o.company_id.mobile"> - </span>
+                        <span t-if="o.company_id.mobile" t-esc="o.company_id.mobile"/>
+                    </div>
+                </div>
+                <div class="ae-logo-box">
+                    <img t-if="o.company_id.logo"
+                         t-att-src="image_data_uri(o.company_id.logo)"
+                         class="ae-logo" alt="Logo"/>
+                </div>
+            </div>
+
+            <div class="ae-separator"/>
+
+            <div class="ae-info-row">
+                <div class="ae-customer-info">
+                    <div><strong>فاتورة إلى:</strong> <span t-field="o.partner_id.name"/></div>
+                    <div t-if="o.partner_id.contact_address">
+                        <span t-esc="o.partner_id.contact_address"/>
+                    </div>
+                    <div t-if="o.partner_id.phone or o.partner_id.mobile">
+                        <span t-if="o.partner_id.phone" t-esc="o.partner_id.phone"/>
+                        <span t-if="o.partner_id.phone and o.partner_id.mobile"> - </span>
+                        <span t-if="o.partner_id.mobile" t-esc="o.partner_id.mobile"/>
+                    </div>
+                </div>
+                <div class="ae-invoice-info">
+                    <table>
+                        <tr>
+                            <th>رقم الفاتورة</th>
+                            <td><span t-field="o.name"/></td>
+                        </tr>
+                        <tr>
+                            <th>تاريخ الفاتورة</th>
+                            <td><span t-field="o.invoice_date"/></td>
+                        </tr>
+                        <tr>
+                            <th>الرصيد السابق</th>
+                            <td>
+                                <span t-esc="o._get_invoice_previous_balance()"
+                                      t-options='{"widget": "monetary", "display_currency": o.company_currency_id}'/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <table class="ae-lines-table">
+                <thead>
+                    <tr>
+                        <th class="ae-col-no">م</th>
+                        <th class="ae-col-code">كود</th>
+                        <th>اسم المنتج / الوصف</th>
+                        <th class="ae-col-qty">الكمية</th>
+                        <th class="ae-col-price">سعر الوحدة</th>
+                        <th class="ae-col-total">المجموع</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="line_number" t-value="0"/>
+                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                        <tr t-if="line.display_type == 'product'">
+                            <t t-set="line_number" t-value="line_number + 1"/>
+                            <td class="ae-center"><span t-esc="line_number"/></td>
+                            <td class="ae-center"><span t-esc="line.product_id.default_code or ''"/></td>
+                            <td>
+                                <span t-esc="line.product_id.display_name or line.name"/>
+                                <div class="ae-line-description"
+                                     t-if="line.name and line.product_id and line.name != line.product_id.display_name">
+                                    <span t-esc="line.name"/>
+                                </div>
+                            </td>
+                            <td class="ae-center"><span t-field="line.quantity"/></td>
+                            <td class="ae-number">
+                                <span t-field="line.price_unit"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                            <td class="ae-number">
+                                <span t-field="line.price_subtotal"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr t-if="line.display_type == 'line_section'" class="ae-section-line">
+                            <td colspan="6"><strong t-field="line.name"/></td>
+                        </tr>
+                        <tr t-if="line.display_type == 'line_note'" class="ae-note-line">
+                            <td colspan="6"><span t-field="line.name"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+
+            <div class="ae-summary-area">
+                <div class="ae-account-total">
+                    <strong>إجمالي الحساب</strong>
+                    <div>
+                        <span t-esc="o._get_invoice_previous_balance() + o.amount_residual_signed"
+                              t-options='{"widget": "monetary", "display_currency": o.company_currency_id}'/>
+                    </div>
+                </div>
+                <table class="ae-totals-table">
+                    <tr>
+                        <th>المجموع</th>
+                        <td>
+                            <span t-field="o.amount_untaxed"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                    <tr t-if="o.amount_tax">
+                        <th>الضرائب</th>
+                        <td>
+                            <span t-field="o.amount_tax"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                    <tr class="ae-grand-total">
+                        <th>الإجمالي</th>
+                        <td>
+                            <span t-field="o.amount_total"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>مدفوع</th>
+                        <td>
+                            <span t-esc="o._get_invoice_paid_amount()"
+                                  t-options='{"widget": "monetary", "display_currency": o.company_currency_id}'/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>الرصيد المستحق</th>
+                        <td>
+                            <span t-field="o.amount_residual"
+                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="ae-receipt-block">
+                <div class="ae-dotted-row">
+                    عدد الفواتير القديمة <span class="ae-dots"/>
+                    عدد الفواتير المستلمة <span class="ae-dots"/>
+                </div>
+                <div class="ae-dotted-row">استلمت أنا <span class="ae-dots ae-wide-dots"/></div>
+                <div class="ae-terms">
+                    البضاعة المبينة أعلاه بعد المعاينة والقبول بدون اعتراض منا حيث أصبحت ديناً علينا
+                    ونتعهد بسداد قيمتها عند الطلب.
+                </div>
+                <div class="ae-dotted-row">
+                    المبلغ المسدد <span class="ae-dots"/> المبلغ المتبقي <span class="ae-dots"/>
+                </div>
+            </div>
+
+            <div class="ae-signatures">
+                <div>توقيع المندوب<br/><span class="ae-sign-line"/></div>
+                <div>توقيع أمين المخزن<br/><span class="ae-sign-line"/></div>
+                <div>توقيع المراجع<br/><span class="ae-sign-line"/></div>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_invoice_two_copies_document">
+        <t t-call="web.html_container">
+            <style>
+                @page { size: A4 portrait; margin: 4mm 5mm; }
+                body { font-family: "DejaVu Sans", Arial, sans-serif; }
+                .ae-page { width: 100%; height: 288mm; margin: 0; padding: 0; page-break-after: always; overflow: hidden; }
+                .ae-page:last-child { page-break-after: auto; }
+                .ae-invoice-copy { height: 142mm; box-sizing: border-box; padding: 2.5mm 5mm 1.5mm; font-size: 9px; line-height: 1.25; color: #000; overflow: hidden; }
+                .ae-copy-cut { height: 2mm; border-top: 1px dashed #777; text-align: center; font-size: 7px; color: #777; line-height: 2mm; }
+                .ae-header { display: table; width: 100%; height: 19mm; table-layout: fixed; }
+                .ae-company-text, .ae-logo-box { display: table-cell; vertical-align: middle; }
+                .ae-company-text { width: 75%; text-align: center; }
+                .ae-logo-box { width: 25%; text-align: center; }
+                .ae-company-name { font-size: 14px; font-weight: bold; margin-bottom: 1mm; }
+                .ae-company-address, .ae-company-contact { font-size: 8px; }
+                .ae-logo { max-width: 38mm; max-height: 17mm; }
+                .ae-separator { border-top: 1px solid #222; margin: 1mm 0 2mm; }
+                .ae-info-row { display: table; width: 100%; min-height: 22mm; table-layout: fixed; }
+                .ae-customer-info, .ae-invoice-info { display: table-cell; vertical-align: top; }
+                .ae-customer-info { width: 58%; font-size: 9px; padding: 1mm 2mm; }
+                .ae-invoice-info { width: 42%; }
+                .ae-invoice-info table { width: 100%; border-collapse: collapse; }
+                .ae-invoice-info th { width: 45%; text-align: right; font-weight: bold; padding: 0.7mm 1mm; }
+                .ae-invoice-info td { text-align: left; padding: 0.7mm 1mm; direction: ltr; }
+                .ae-lines-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: 1mm; }
+                .ae-lines-table th, .ae-lines-table td { border: 0.6px solid #444; padding: 1mm 0.8mm; vertical-align: middle; }
+                .ae-lines-table th { font-weight: bold; text-align: center; background: #f4f4f4; }
+                .ae-col-no { width: 5%; } .ae-col-code { width: 10%; } .ae-col-qty { width: 10%; }
+                .ae-col-price { width: 15%; } .ae-col-total { width: 16%; }
+                .ae-center { text-align: center; } .ae-number { text-align: left; direction: ltr; }
+                .ae-line-description { font-size: 7px; color: #444; }
+                .ae-section-line { background: #eee; } .ae-note-line { font-style: italic; }
+                .ae-summary-area { display: table; width: 100%; table-layout: fixed; margin-top: 1.5mm; }
+                .ae-account-total, .ae-totals-table { display: table-cell; vertical-align: bottom; }
+                .ae-account-total { width: 58%; text-align: center; font-size: 9px; padding-bottom: 2mm; }
+                .ae-totals-table { width: 42%; border-collapse: collapse; }
+                .ae-totals-table th, .ae-totals-table td { border-bottom: 0.6px solid #555; padding: 0.7mm 1mm; }
+                .ae-totals-table th { text-align: right; width: 52%; }
+                .ae-totals-table td { text-align: left; direction: ltr; }
+                .ae-grand-total { font-weight: bold; }
+                .ae-receipt-block { margin-top: 1mm; font-size: 7.5px; text-align: center; }
+                .ae-dotted-row { white-space: nowrap; margin: 0.5mm 0; }
+                .ae-dots { display: inline-block; width: 23mm; border-bottom: 1px dotted #333; margin: 0 1mm; }
+                .ae-wide-dots { width: 75mm; }
+                .ae-terms { margin: 0.5mm 0; }
+                .ae-signatures { display: table; width: 100%; table-layout: fixed; margin-top: 1mm; font-size: 7.5px; text-align: center; }
+                .ae-signatures &gt; div { display: table-cell; width: 33.33%; }
+                .ae-sign-line { display: inline-block; width: 28mm; border-bottom: 1px dotted #333; margin-top: 1mm; }
+            </style>
+            <t t-foreach="docs" t-as="o">
+                <div class="page ae-page">
+                    <t t-call="account_enhancement.report_invoice_half_page_copy"/>
+                    <div class="ae-copy-cut">قص هنا</div>
+                    <t t-call="account_enhancement.report_invoice_half_page_copy"/>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_invoice_two_copies" model="ir.actions.report">
+        <field name="name">Invoice - Two Copies A4</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">account_enhancement.report_invoice_two_copies_document</field>
+        <field name="report_file">account_enhancement.report_invoice_two_copies_document</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="account_enhancement.paperformat_invoice_two_copies_a4"/>
+        <field name="print_report_name">'Invoice - %s - Two Copies' % (object.name or '')</field>
+    </record>
+</odoo>
