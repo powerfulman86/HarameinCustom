@@ -179,16 +179,17 @@
             <meta charset="utf-8"/>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
             <style>
-                @page { size: A4 portrait; margin: 4mm 5mm; }
+                @page { size: A4 landscape; margin: 4mm 5mm; }
                 html, body {
                     font-family: "DejaVu Sans", "Noto Naskh Arabic", Arial, sans-serif;
                     direction: rtl;
                     unicode-bidi: embed;
                 }
-                .ae-page { width: 100%; height: 288mm; margin: 0; padding: 0; page-break-after: always; overflow: hidden; }
+                .ae-page { width: 100%; height: 200mm; margin: 0; padding: 0; page-break-after: always; overflow: hidden; white-space: nowrap; }
                 .ae-page:last-child { page-break-after: auto; }
-                .ae-invoice-copy { height: 142mm; box-sizing: border-box; padding: 2.5mm 5mm 1.5mm; font-size: 9px; line-height: 1.25; color: #000; overflow: hidden; }
-                .ae-copy-cut { height: 2mm; border-top: 1px dashed #777; text-align: center; font-size: 7px; color: #777; line-height: 2mm; }
+                .ae-invoice-copy { display: inline-block; vertical-align: top; width: 142mm; height: 200mm; box-sizing: border-box; padding: 4mm 5mm 2mm; font-size: 9px; line-height: 1.25; color: #000; overflow: hidden; white-space: normal; }
+                .ae-copy-cut { display: inline-block; vertical-align: top; width: 2mm; height: 200mm; border-right: 1px dashed #777; text-align: center; font-size: 7px; color: #777; line-height: 1; box-sizing: border-box; position: relative; }
+                .ae-copy-cut span { position: absolute; top: 96mm; right: -4mm; width: 10mm; transform: rotate(90deg); transform-origin: center; background: #fff; }
                 .ae-header { display: table; width: 100%; height: 19mm; table-layout: fixed; }
                 .ae-company-text, .ae-logo-box { display: table-cell; vertical-align: middle; }
                 .ae-company-text { width: 75%; text-align: center; }
@@ -232,7 +233,7 @@
             <t t-foreach="docs" t-as="o">
                 <div class="page ae-page">
                     <t t-call="account_enhancement.report_invoice_half_page_copy"/>
-                    <div class="ae-copy-cut">قص هنا</div>
+                    <div class="ae-copy-cut"><span>قص هنا</span></div>
                     <t t-call="account_enhancement.report_invoice_half_page_copy"/>
                 </div>
             </t>
