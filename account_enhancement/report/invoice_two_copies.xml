@@ -185,11 +185,11 @@
                     direction: rtl;
                     unicode-bidi: embed;
                 }
-                .ae-page { width: 100%; height: 200mm; margin: 0; padding: 0; page-break-after: always; overflow: hidden; white-space: nowrap; }
+                .ae-page { width: 100%; height: 202mm; margin: 0; padding: 0; page-break-after: always; overflow: hidden; white-space: nowrap; position: relative; font-size: 0; direction: rtl; }
                 .ae-page:last-child { page-break-after: auto; }
-                .ae-invoice-copy { display: inline-block; vertical-align: top; width: 142mm; height: 200mm; box-sizing: border-box; padding: 5mm 4mm 3mm; font-size: 11.5px; line-height: 1.35; color: #000; overflow: hidden; white-space: normal; }
-                .ae-copy-cut { display: inline-block; vertical-align: top; width: 2mm; height: 200mm; border-right: 1px dashed #777; text-align: center; font-size: 7px; color: #777; line-height: 1; box-sizing: border-box; position: relative; }
-                .ae-copy-cut span { position: absolute; top: 96mm; right: -4mm; width: 10mm; transform: rotate(90deg); transform-origin: center; background: #fff; }
+                .ae-invoice-copy { display: inline-block; vertical-align: top; width: 50%; height: 202mm; box-sizing: border-box; padding: 5mm 4mm 3mm; font-size: 11.5px; line-height: 1.35; color: #000; overflow: hidden; white-space: normal; }
+                .ae-copy-cut { position: absolute; top: 0; right: 50%; width: 0; height: 202mm; border-right: 1px dashed #777; text-align: center; font-size: 7px; color: #777; line-height: 1; box-sizing: border-box; z-index: 5; }
+                .ae-copy-cut span { position: absolute; top: 96mm; right: -5mm; width: 10mm; transform: rotate(90deg); transform-origin: center; background: #fff; font-size: 7px; }
                 .ae-header { display: table; width: 100%; height: 25mm; table-layout: fixed; }
                 .ae-company-text, .ae-logo-box { display: table-cell; vertical-align: middle; }
                 .ae-company-text { width: 75%; text-align: center; }
@@ -202,11 +202,11 @@
                 .ae-customer-info, .ae-invoice-info { display: table-cell; vertical-align: top; }
                 .ae-customer-info { width: 58%; font-size: 11px; padding: 2mm 2mm; line-height: 1.5; }
                 .ae-invoice-info { width: 42%; }
-                .ae-invoice-info table { width: 100%; border-collapse: collapse; }
-                .ae-invoice-info th { width: 45%; text-align: right; font-weight: bold; padding: 1.2mm 1mm; font-size: 12px; }
-                .ae-invoice-info td { text-align: left; padding: 1.2mm 1mm; direction: ltr; font-size: 11px; }
+                .ae-invoice-info table { width: 100%; border-collapse: collapse; border: 1px solid #000; }
+                .ae-invoice-info th { width: 45%; text-align: right; font-weight: bold; padding: 1.2mm 1mm; font-size: 12px; border: 1px solid #000; }
+                .ae-invoice-info td { text-align: left; padding: 1.2mm 1mm; direction: ltr; font-size: 11px; border: 1px solid #000; }
                 .ae-lines-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: 1mm; }
-                .ae-lines-table th, .ae-lines-table td { border: 0.7px solid #444; padding: 1.7mm 1mm; vertical-align: middle; font-size: 11px; }
+                .ae-lines-table th, .ae-lines-table td { border: 1px solid #000; padding: 1.7mm 1mm; vertical-align: middle; font-size: 11px; }
                 .ae-lines-table th { font-weight: bold; text-align: center; background: #f4f4f4; font-size: 11.5px; }
                 .ae-col-no { width: 5%; } .ae-col-code { width: 10%; } .ae-col-qty { width: 10%; }
                 .ae-col-price { width: 15%; } .ae-col-total { width: 16%; }
@@ -216,8 +216,8 @@
                 .ae-summary-area { display: table; width: 100%; table-layout: fixed; margin-top: 3mm; }
                 .ae-account-total, .ae-totals-table { display: table-cell; vertical-align: bottom; }
                 .ae-account-total { width: 58%; text-align: center; font-size: 12px; padding-bottom: 4mm; }
-                .ae-totals-table { width: 42%; border-collapse: collapse; }
-                .ae-totals-table th, .ae-totals-table td { border-bottom: 0.7px solid #555; padding: 1.2mm 1mm; font-size: 11.5px; }
+                .ae-totals-table { width: 42%; border-collapse: collapse; border: 1px solid #000; }
+                .ae-totals-table th, .ae-totals-table td { border: 1px solid #000; padding: 1.2mm 1mm; font-size: 11.5px; }
                 .ae-totals-table th { text-align: right; width: 52%; }
                 .ae-totals-table td { text-align: left; direction: ltr; }
                 .ae-grand-total { font-weight: bold; }
