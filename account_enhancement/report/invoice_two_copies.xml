@@ -187,48 +187,48 @@
                 }
                 .ae-page { width: 100%; height: 200mm; margin: 0; padding: 0; page-break-after: always; overflow: hidden; white-space: nowrap; }
                 .ae-page:last-child { page-break-after: auto; }
-                .ae-invoice-copy { display: inline-block; vertical-align: top; width: 142mm; height: 200mm; box-sizing: border-box; padding: 4mm 5mm 2mm; font-size: 9px; line-height: 1.25; color: #000; overflow: hidden; white-space: normal; }
+                .ae-invoice-copy { display: inline-block; vertical-align: top; width: 142mm; height: 200mm; box-sizing: border-box; padding: 5mm 4mm 3mm; font-size: 11.5px; line-height: 1.35; color: #000; overflow: hidden; white-space: normal; }
                 .ae-copy-cut { display: inline-block; vertical-align: top; width: 2mm; height: 200mm; border-right: 1px dashed #777; text-align: center; font-size: 7px; color: #777; line-height: 1; box-sizing: border-box; position: relative; }
                 .ae-copy-cut span { position: absolute; top: 96mm; right: -4mm; width: 10mm; transform: rotate(90deg); transform-origin: center; background: #fff; }
-                .ae-header { display: table; width: 100%; height: 19mm; table-layout: fixed; }
+                .ae-header { display: table; width: 100%; height: 25mm; table-layout: fixed; }
                 .ae-company-text, .ae-logo-box { display: table-cell; vertical-align: middle; }
                 .ae-company-text { width: 75%; text-align: center; }
                 .ae-logo-box { width: 25%; text-align: center; }
-                .ae-company-name { font-size: 14px; font-weight: bold; margin-bottom: 1mm; }
-                .ae-company-address, .ae-company-contact { font-size: 8px; }
-                .ae-logo { max-width: 38mm; max-height: 17mm; }
-                .ae-separator { border-top: 1px solid #222; margin: 1mm 0 2mm; }
-                .ae-info-row { display: table; width: 100%; min-height: 22mm; table-layout: fixed; }
+                .ae-company-name { font-size: 18px; font-weight: bold; margin-bottom: 1.5mm; }
+                .ae-company-address, .ae-company-contact { font-size: 10px; }
+                .ae-logo { max-width: 42mm; max-height: 23mm; }
+                .ae-separator { border-top: 1.2px solid #222; margin: 1.5mm 0 3mm; }
+                .ae-info-row { display: table; width: 100%; min-height: 31mm; table-layout: fixed; }
                 .ae-customer-info, .ae-invoice-info { display: table-cell; vertical-align: top; }
-                .ae-customer-info { width: 58%; font-size: 9px; padding: 1mm 2mm; }
+                .ae-customer-info { width: 58%; font-size: 11px; padding: 2mm 2mm; line-height: 1.5; }
                 .ae-invoice-info { width: 42%; }
                 .ae-invoice-info table { width: 100%; border-collapse: collapse; }
-                .ae-invoice-info th { width: 45%; text-align: right; font-weight: bold; padding: 0.7mm 1mm; }
-                .ae-invoice-info td { text-align: left; padding: 0.7mm 1mm; direction: ltr; }
+                .ae-invoice-info th { width: 45%; text-align: right; font-weight: bold; padding: 1.2mm 1mm; font-size: 12px; }
+                .ae-invoice-info td { text-align: left; padding: 1.2mm 1mm; direction: ltr; font-size: 11px; }
                 .ae-lines-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: 1mm; }
-                .ae-lines-table th, .ae-lines-table td { border: 0.6px solid #444; padding: 1mm 0.8mm; vertical-align: middle; }
-                .ae-lines-table th { font-weight: bold; text-align: center; background: #f4f4f4; }
+                .ae-lines-table th, .ae-lines-table td { border: 0.7px solid #444; padding: 1.7mm 1mm; vertical-align: middle; font-size: 11px; }
+                .ae-lines-table th { font-weight: bold; text-align: center; background: #f4f4f4; font-size: 11.5px; }
                 .ae-col-no { width: 5%; } .ae-col-code { width: 10%; } .ae-col-qty { width: 10%; }
                 .ae-col-price { width: 15%; } .ae-col-total { width: 16%; }
                 .ae-center { text-align: center; } .ae-number { text-align: left; direction: ltr; }
-                .ae-line-description { font-size: 7px; color: #444; }
+                .ae-line-description { font-size: 9px; color: #444; }
                 .ae-section-line { background: #eee; } .ae-note-line { font-style: italic; }
-                .ae-summary-area { display: table; width: 100%; table-layout: fixed; margin-top: 1.5mm; }
+                .ae-summary-area { display: table; width: 100%; table-layout: fixed; margin-top: 3mm; }
                 .ae-account-total, .ae-totals-table { display: table-cell; vertical-align: bottom; }
-                .ae-account-total { width: 58%; text-align: center; font-size: 9px; padding-bottom: 2mm; }
+                .ae-account-total { width: 58%; text-align: center; font-size: 12px; padding-bottom: 4mm; }
                 .ae-totals-table { width: 42%; border-collapse: collapse; }
-                .ae-totals-table th, .ae-totals-table td { border-bottom: 0.6px solid #555; padding: 0.7mm 1mm; }
+                .ae-totals-table th, .ae-totals-table td { border-bottom: 0.7px solid #555; padding: 1.2mm 1mm; font-size: 11.5px; }
                 .ae-totals-table th { text-align: right; width: 52%; }
                 .ae-totals-table td { text-align: left; direction: ltr; }
                 .ae-grand-total { font-weight: bold; }
-                .ae-receipt-block { margin-top: 1mm; font-size: 7.5px; text-align: center; }
-                .ae-dotted-row { white-space: nowrap; margin: 0.5mm 0; }
+                .ae-receipt-block { margin-top: 4mm; font-size: 9.5px; line-height: 1.45; text-align: center; }
+                .ae-dotted-row { white-space: nowrap; margin: 1mm 0; }
                 .ae-dots { display: inline-block; width: 23mm; border-bottom: 1px dotted #333; margin: 0 1mm; }
                 .ae-wide-dots { width: 75mm; }
-                .ae-terms { margin: 0.5mm 0; }
-                .ae-signatures { display: table; width: 100%; table-layout: fixed; margin-top: 1mm; font-size: 7.5px; text-align: center; }
+                .ae-terms { margin: 1.2mm 0; }
+                .ae-signatures { display: table; width: 100%; table-layout: fixed; margin-top: 4mm; font-size: 10px; text-align: center; }
                 .ae-signatures &gt; div { display: table-cell; width: 33.33%; }
-                .ae-sign-line { display: inline-block; width: 28mm; border-bottom: 1px dotted #333; margin-top: 1mm; }
+                .ae-sign-line { display: inline-block; width: 32mm; border-bottom: 1px dotted #333; margin-top: 2mm; }
             </style>
             <t t-foreach="docs" t-as="o">
                 <div class="page ae-page">
