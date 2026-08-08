@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--
+            Sale Order / Quotation form
+            Prevent creating or editing master data directly from:
+              - Customer
+              - Product
+              - Unit of Measure
+
+            Existing records can still be selected normally.
+        -->
+        <record id="view_order_form_disable_relation_create_edit" model="ir.ui.view">
+            <field name="name">sale.order.form.disable.relation.create.edit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Customer: apply to every partner_id occurrence in the Sale Order form -->
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+                </xpath>
+
+                <!-- Product: apply to every product_id occurrence, including order-line tree/form -->
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+                </xpath>
+
+                <!-- UoM: apply to every product_uom occurrence in order-line tree/form -->
+                <xpath expr="//field[@name='product_uom']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Quotation list: prevent creating/editing/opening Customer from the relational field -->
+        <record id="view_quotation_tree_disable_partner_create_edit" model="ir.ui.view">
+            <field name="name">sale.order.quotation.tree.disable.partner.create.edit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Sales Order list: same restriction for Customer -->
+        <record id="view_order_tree_disable_partner_create_edit" model="ir.ui.view">
+            <field name="name">sale.order.tree.disable.partner.create.edit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

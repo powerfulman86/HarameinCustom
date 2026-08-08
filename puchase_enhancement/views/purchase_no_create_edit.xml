@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Purchase Order / RFQ form:
+         allow choosing existing Vendor/Product/UoM only.
+         Block quick create, Create & Edit, and opening the related master record. -->
+    <record id="purchase_order_form_no_create_edit_relations" model="ir.ui.view">
+        <field name="name">purchase.order.form.no.create.edit.relations</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_uom']" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- RFQ list -->
+    <record id="purchase_order_kpis_tree_no_create_edit_vendor" model="ir.ui.view">
+        <field name="name">purchase.order.kpis.tree.no.create.edit.vendor</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- Generic Purchase Order list -->
+    <record id="purchase_order_tree_no_create_edit_vendor" model="ir.ui.view">
+        <field name="name">purchase.order.tree.no.create.edit.vendor</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- Confirmed Purchase Orders list -->
+    <record id="purchase_order_view_tree_no_create_edit_vendor" model="ir.ui.view">
+        <field name="name">purchase.order.view.tree.no.create.edit.vendor</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- Standalone Purchase Order Line list -->
+    <record id="purchase_order_line_tree_no_create_edit_relations" model="ir.ui.view">
+        <field name="name">purchase.order.line.tree.no.create.edit.relations</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_tree"/>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </field>
+            <field name="product_id" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </field>
+            <field name="product_uom" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- Standalone Purchase Order Line form -->
+    <record id="purchase_order_line_form_no_create_edit_relations" model="ir.ui.view">
+        <field name="name">purchase.order.line.form.no.create.edit.relations</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </field>
+            <field name="product_id" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </field>
+            <field name="product_uom" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_open': True}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
