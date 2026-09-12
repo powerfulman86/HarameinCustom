@@ -17,6 +17,7 @@
         # 'security/ir.model.access.csv',
         # 'security/ir_rule.xml',
         'views/external_layout_template.xml',
+        'views/account_move_views.xml',
         'report/paperformat.xml',
         'report/invoice_two_copies.xml',
     ],
